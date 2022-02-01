@@ -38,9 +38,6 @@ namespace MaitlandCodes.OSRS.ShopFlipper.Jobs
         }
 
         [DisableIdenticalQueuedItems]
-#if DEBUG
-        [DisableConcurrentExecution(600)]
-#endif
         public async Task ConsumeCatalogue(ItemCategory itemCategory)
         {
             var categories = await apiClient.GetCatalogues(itemCategory);
@@ -48,6 +45,14 @@ namespace MaitlandCodes.OSRS.ShopFlipper.Jobs
 
             this.dbContext.Upsert(categories);
             await this.dbContext.SaveChangesAsync();
+
+            foreach (var a in categories.Alpha)
+            {
+                if (a.Items == 0)
+                    continue;
+
+                this.backgroundJobClient.Enqueue<ItemConsumer>(y => y.ConsumeItems(itemCategory, a.Letter, 1));
+            }
         }
     }
 }

@@ -22,6 +22,7 @@ namespace MaitlandCodes.OSRS.ShopFlipper
             });
 
             serviceDescriptors.AddScoped<CatalogueConsumer>();
+            serviceDescriptors.AddScoped<ItemConsumer>();
         }
 
         public void Configure()
