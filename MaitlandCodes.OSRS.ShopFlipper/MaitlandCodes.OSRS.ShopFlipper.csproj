@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MAD.Extensions.EFCore" Version="6.0.1" />
+    <PackageReference Include="MAD.Extensions.EFCore" Version="6.0.2" />
     <PackageReference Include="MaitlandCodes.OSRS.GEItemAPI" Version="1.0.0.201002120" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Jobs\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

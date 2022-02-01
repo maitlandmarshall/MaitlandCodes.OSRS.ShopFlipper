@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MaitlandCodes.OSRS.ShopFlipper.Database
 {
-    internal class ShopFlipperDbContext : DbContext
+    public class ShopFlipperDbContext : DbContext
     {
         public ShopFlipperDbContext(DbContextOptions options) : base(options) { }
 
