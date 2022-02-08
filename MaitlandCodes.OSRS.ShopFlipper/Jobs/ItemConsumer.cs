@@ -51,6 +51,11 @@ namespace MaitlandCodes.OSRS.ShopFlipper.Jobs
             await this.dbContext.SaveChangesAsync();
 
             this.backgroundJobClient.Enqueue<ItemConsumer>(y => y.ConsumeItems(itemCategory, alpha, page + 1));
+
+            foreach (var itm in itemsResult.Items)
+            {
+                this.backgroundJobClient.Enqueue<StoreLocationConsumer>(y => y.ConsumeShopLocation(itm.Id));
+            }
         }
     }
 }

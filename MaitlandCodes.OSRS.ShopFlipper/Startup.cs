@@ -5,6 +5,7 @@ using MaitlandCodes.OSRS.ShopFlipper.Database;
 using Microsoft.EntityFrameworkCore;
 using MaitlandCodes.OSRS.ShopFlipper.Jobs;
 using MIFCore.Hangfire;
+using MaitlandCodes.OSRS.WikiClient;
 
 namespace MaitlandCodes.OSRS.ShopFlipper
 {
@@ -14,6 +15,7 @@ namespace MaitlandCodes.OSRS.ShopFlipper
         {
             serviceDescriptors.AddIntegrationSettings<AppConfig>();
             serviceDescriptors.AddGEItemAPI();
+            serviceDescriptors.AddOSRSWikiClients();
 
             serviceDescriptors.AddDbContext<ShopFlipperDbContext>((svc, opt) =>
             {
@@ -23,6 +25,7 @@ namespace MaitlandCodes.OSRS.ShopFlipper
 
             serviceDescriptors.AddScoped<CatalogueConsumer>();
             serviceDescriptors.AddScoped<ItemConsumer>();
+            serviceDescriptors.AddScoped<StoreLocationConsumer>();
         }
 
         public void Configure()

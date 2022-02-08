@@ -7,7 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="MAD.Extensions.EFCore" Version="6.0.2" />
-    <PackageReference Include="MaitlandCodes.OSRS.GEItemAPI" Version="1.0.0.201002120" />
+    <PackageReference Include="MaitlandCodes.OSRS.GEItemAPI" Version="1.0.0.208045149" />
+    <PackageReference Include="MaitlandCodes.OSRS.WikiClient" Version="1.0.0.208013414" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

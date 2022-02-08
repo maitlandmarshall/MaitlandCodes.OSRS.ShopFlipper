@@ -3,6 +3,7 @@ using MaitlandCodes.OSRS.GEItemAPI.Models;
 using System.Text.Json.Nodes;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MaitlandCodes.OSRS.WikiClient.Models;
 
 namespace MaitlandCodes.OSRS.ShopFlipper.Database
 {
@@ -46,15 +47,36 @@ namespace MaitlandCodes.OSRS.ShopFlipper.Database
                 {
                     cfg.Property(y => y.Price).HasConversion(
                         y => y.ToString(),
-                        y => JsonDocument.Parse(y, default).RootElement);
+                        y => JsonSerializer.SerializeToElement(y, null as JsonSerializerOptions));
                 });
 
                 cfg.OwnsOne(y => y.Today, cfg =>
                 {
                     cfg.Property(y => y.Price).HasConversion(
                         y => y.ToString(),
-                        y => JsonDocument.Parse(y, default).RootElement);
+                        y => JsonSerializer.SerializeToElement(y, null as JsonSerializerOptions));
                 });
+            });
+
+            modelBuilder.Entity<StoreLocation>(cfg =>
+            {
+                cfg.OwnsOne(y => y.Location, cfg =>
+                {
+                    cfg.Ignore(y => y.Title);
+                    cfg.Property(y => y.Uri).HasColumnName("LocationUri");
+                });
+
+                cfg.OwnsOne(y => y.Seller, cfg =>
+                {
+                    cfg.Ignore(y => y.Title);
+                    cfg.Property(y => y.Uri).HasColumnName("SellerUri");
+                });
+
+                cfg.Property<string>("LocationName").IsRequired();
+                cfg.Property<string>("SellerName").IsRequired();
+                cfg.Property<long>("ItemId").IsRequired();
+
+                cfg.HasKey("ItemId", "LocationName", "SellerName");
             });
         }
     }
